@@ -1,10 +1,28 @@
 package com.example.demo.DB;
 import java.util.List;
+
+import com.example.demo.models.Bed;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import com.example.demo.models.Student;
 import com.example.demo.utils.HibernateUtil;
 public class StudentDaoHbnt {
+
+    public Long saveBed(Bed bed) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            Long bedId= (Long) session.save(bed);
+            transaction.commit();
+            return bedId;
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+        return null;
+    }
     /**
      * Save Student
      *
@@ -20,7 +38,7 @@ public class StudentDaoHbnt {
             // commit transaction
             transaction.commit();
 
-            System.out.println(" New student adde using hibernate okey");
+            System.out.println(" New student addeD using hibernate");
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
