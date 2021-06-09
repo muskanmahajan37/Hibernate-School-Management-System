@@ -6,8 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import com.example.demo.models.Student;
 import com.example.demo.utils.HibernateUtil;
-public class StudentDaoHbnt {
 
+public class StudentDaoHbnt {
     public Long saveBed(Bed bed) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
