@@ -1,12 +1,10 @@
 package com.example.demo.Controllers;
-
 import com.example.demo.DB.StudentDao;
 import com.example.demo.DB.StudentDaoHbnt;
 import com.example.demo.models.Student;
 import com.example.demo.models.Bed;
 import com.example.demo.DB.BedDao;
 import com.example.demo.enums.BedType;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +16,6 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 /**
  * Servlet implementation class Students
  */
@@ -31,7 +28,7 @@ public class Students extends HttpServlet {
         String jdbcURL = getServletContext().getInitParameter("jdbcURL");
         String jdbcUsername = getServletContext().getInitParameter("jdbcUsername");
         String jdbcPassword = getServletContext().getInitParameter("jdbcPassword");
-        studentDao = new StudentDao(jdbcURL, jdbcUsername, jdbcPassword);
+//        studentDao = new StudentDao(jdbstudentDaocURL, jdbcUsername, jdbcPassword);
         studentDaoHbnt = new StudentDaoHbnt();
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -71,7 +68,7 @@ public class Students extends HttpServlet {
     }
     private void listStudent(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-        List<Student> listStudent = studentDao.listAllStudents();
+        List<Student> listStudent = studentDaoHbnt.getAllStudent();
         request.setAttribute("listStudent", listStudent);
         RequestDispatcher dispatcher = request.getRequestDispatcher("students.jsp");
         dispatcher.forward(request, response);
@@ -84,7 +81,7 @@ public class Students extends HttpServlet {
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        Student existingStudent = studentDao.getStudent(id);
+        Student existingStudent = studentDaoHbnt.getStudent(id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("add_student.jsp");
         request.setAttribute("student", existingStudent);
         dispatcher.forward(request, response);
@@ -95,9 +92,7 @@ public class Students extends HttpServlet {
         String lastName = request.getParameter("lastName");
         String gender = request.getParameter("gender");
         Student newStudent = new Student(firstName, lastName, gender);
-
         Set<Bed> beds = new HashSet<Bed>();
-
         Bed newBed = new Bed("001", BedType.BUNK);
         BedDao.saveBed(newBed);
 //        newBed.setId(bedId);
@@ -114,19 +109,20 @@ public class Students extends HttpServlet {
         String author = request.getParameter("lastName");
         String gender = request.getParameter("gender");
         Student book = new Student(Long.valueOf(id), title, author, gender);
-        studentDao.updateStudent(book);
+        studentDaoHbnt.updateStudent(book);
         response.sendRedirect("list");
     }
     private void deleteStudent(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         Student book = new Student(Long.valueOf(id));
-        studentDao.deleteStudent(book);
+        studentDaoHbnt.deleteStudent(book.getId());
         response.sendRedirect("list");
     }
     private void getStudent(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        Student existingStudent = studentDao.getStudent(id);
+        long id = Long.parseLong(request.getParameter("id"));
+        Student existingStudent = studentDaoHbnt.getStudent(id);
+        System.out.println(existingStudent.getFirstName());
         request.setAttribute("viewStudent", existingStudent);
         RequestDispatcher dispatcher = request.getRequestDispatcher("viewStudent.jsp");
         dispatcher.forward(request, response);
