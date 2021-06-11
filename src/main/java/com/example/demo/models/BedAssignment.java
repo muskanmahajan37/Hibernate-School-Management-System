@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "course_assignment")
+@Table(name = "bed_assignment")
 public class BedAssignment implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -27,18 +27,20 @@ public class BedAssignment implements Serializable {
 
     public BedAssignment(){}
 
-    public BedAssignment(String whenAssigned, String whenReleased, String assignedBy, String comments, AssignmentStatus assignmentstatus){
-        this.assignedOn= LocalDateTime.now().toString();
+    public BedAssignment( String whenAssigned, String whenReleased, String assignedBy, String comments, AssignmentStatus assignmentstatus){
+        this.whenAssigned= LocalDateTime.now().toString();
+        this.whenReleased= LocalDateTime.now().toString();
         this.assignedBy= assignedBy;
-        this.status= status;
-        this.lastStatusChangedOn= LocalDateTime.now().toString();
+        this.comments= comments;
+        this.assignmentstatus= assignmentstatus;
     }
 
-    public CourseAssignment(Long id,String assignedOn, String assignedBy, AssignmentStatus status,String lastStatusChangedOn){
-        this.id = id;
+    public BedAssignment(Long id, String whenAssigned, String whenReleased, String assignedBy, String comments, AssignmentStatus assignmentstatus){
+        this.whenAssigned= LocalDateTime.now().toString();
+        this.whenReleased= LocalDateTime.now().toString();
         this.assignedBy= assignedBy;
-        this.status= status;
-        this.lastStatusChangedOn= LocalDateTime.now().toString();
+        this.comments= comments;
+        this.assignmentstatus= assignmentstatus;
     }
 
     public String getAssignedBy() {
