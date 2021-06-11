@@ -7,40 +7,39 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "bed_assignment")
+@Table(name = "course_assignment")
 public class BedAssignment implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    private String whenAssigned;
-    private String whenReleased;
+    private String assignedOn;
     private String assignedBy;
-    private String comments;
+    
     @Enumerated(EnumType.STRING)
-    private AssignmentStatus assignmentstatus;
+    private AssignmentStatus status;
+    private String lastStatusChangedOn;
+
     @ManyToOne
     private Student student;
     @ManyToOne
-    private Course bed;
+    private Course course;
 
     public BedAssignment(){}
 
-    public BedAssignment( String whenAssigned, String whenReleased, String assignedBy, String comments, AssignmentStatus assignmentstatus){
-        this.whenAssigned= LocalDateTime.now().toString();
-        this.whenReleased= LocalDateTime.now().toString();
+    public BedAssignment(String assignedOn, String assignedBy, AssignmentStatus status,String lastStatusChangedOn){
+        this.assignedOn= LocalDateTime.now().toString();
         this.assignedBy= assignedBy;
-        this.comments= comments;
-        this.assignmentstatus= assignmentstatus;
+        this.status= status;
+        this.lastStatusChangedOn= LocalDateTime.now().toString();
     }
 
-    public BedAssignment(Long id, String whenAssigned, String whenReleased, String assignedBy, String comments, AssignmentStatus assignmentstatus){
-        this.whenAssigned= LocalDateTime.now().toString();
-        this.whenReleased= LocalDateTime.now().toString();
+    public BedAssignment(Long id,String assignedOn, String assignedBy, AssignmentStatus status,String lastStatusChangedOn){
+        this.id = id;
         this.assignedBy= assignedBy;
-        this.comments= comments;
-        this.assignmentstatus= assignmentstatus;
+        this.status= status;
+        this.lastStatusChangedOn= LocalDateTime.now().toString();
     }
 
     public String getAssignedBy() {
@@ -49,14 +48,6 @@ public class BedAssignment implements Serializable {
 
     public void setAssignedBy(String assignedBy) {
         this.assignedBy = assignedBy;
-    }
-
-    public String getComments() {
-        return comments;
-    }
-
-    public void setComments(String assignedBy) {
-        this.comments = comments;
     }
 
     public Long getId() {
@@ -68,13 +59,20 @@ public class BedAssignment implements Serializable {
     }
 
     public AssignmentStatus getStatus() {
-        return assignmentstatus;
+        return status;
     }
 
     public void setStatus(AssignmentStatus status) {
-        this.assignmentstatus = status;
+        this.status = status;
     }
 
+    public String getLastStatusChangedOn() {
+        return lastStatusChangedOn;
+    }
+
+    public void setLastStatusChangedOn(String lastStatusChangedOn) {
+        this.lastStatusChangedOn = lastStatusChangedOn;
+    }
     public Student getStudent() {
         return student;
     }
@@ -84,10 +82,10 @@ public class BedAssignment implements Serializable {
     }
 
     public Course getCourse() {
-        return bed;
+        return course;
     }
 
     public void setCourse(Course course) {
-        this.bed = course;
+        this.course = course;
     }
 }
