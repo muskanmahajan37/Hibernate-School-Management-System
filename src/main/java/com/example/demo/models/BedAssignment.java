@@ -75,9 +75,6 @@ public class BedAssignment implements Serializable {
         this.assignmentstatus = status;
     }
 
-    public void setLastStatusChangedOn(String lastStatusChangedOn) {
-        this.lastStatusChangedOn = lastStatusChangedOn;
-    }
     public Student getStudent() {
         return student;
     }
@@ -87,10 +84,10 @@ public class BedAssignment implements Serializable {
     }
 
     public Course getCourse() {
-        return course;
+        return bed;
     }
 
     public void setCourse(Course course) {
-        this.course = course;
+        this.bed = course;
     }
 }
