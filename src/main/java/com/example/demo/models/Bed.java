@@ -16,10 +16,13 @@ public class Bed{
     @Enumerated(EnumType.STRING)
     @Column(name="bed_type")
     private BedType type;
-    @ManyToMany(mappedBy = "beds", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private Set<Student> students = new HashSet<Student>();
-    public Bed() {
-    }
+
+//    @ManyToMany(mappedBy = "beds", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+//    private Set<Student> students = new HashSet<Student>();
+//    public Bed() {
+//    }
+    @OneToMany(mappedBy = "bed", fetch = FetchType.LAZY)
+    private Set<Student> students= new HashSet<>();
 
     public Bed(String bedNumber, BedType type) {
         this.bedNumber = bedNumber;
@@ -34,6 +37,11 @@ public class Bed{
         this.bedNumber = bedNumber;
         this.type = type;
     }
+
+    public Bed() {
+
+    }
+
     public Long getId() {
         return id;
     }
