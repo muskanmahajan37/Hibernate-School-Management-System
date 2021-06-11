@@ -51,6 +51,14 @@ public class BedAssignment implements Serializable {
         this.assignedBy = assignedBy;
     }
 
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String assignedBy) {
+        this.comments = comments;
+    }
+
     public Long getId() {
         return id;
     }
@@ -60,15 +68,11 @@ public class BedAssignment implements Serializable {
     }
 
     public AssignmentStatus getStatus() {
-        return status;
+        return assignmentstatus;
     }
 
     public void setStatus(AssignmentStatus status) {
-        this.status = status;
-    }
-
-    public String getLastStatusChangedOn() {
-        return lastStatusChangedOn;
+        this.assignmentstatus = status;
     }
 
     public void setLastStatusChangedOn(String lastStatusChangedOn) {
