@@ -19,7 +19,7 @@ public class BedAssignment implements Serializable {
     private String assignedBy;
     private String comments;
     @Enumerated(EnumType.STRING)
-    private AssignmentStatus Assignmentstatus;
+    private AssignmentStatus assignmentstatus;
     @ManyToOne
     private Student student;
     @ManyToOne
@@ -27,7 +27,7 @@ public class BedAssignment implements Serializable {
 
     public BedAssignment(){}
 
-    public BedAssignment(String assignedOn, String assignedBy, AssignmentStatus status,String lastStatusChangedOn){
+    public BedAssignment(String whenAssigned, String whenReleased, String assignedBy, String comments, AssignmentStatus assignmentstatus){
         this.assignedOn= LocalDateTime.now().toString();
         this.assignedBy= assignedBy;
         this.status= status;
