@@ -1,9 +1,6 @@
 package com.example.demo.utils;
 
-import com.example.demo.models.Course;
-import com.example.demo.models.CourseAssignment;
-import com.example.demo.models.Student;
-import com.example.demo.models.Bed;
+import com.example.demo.models.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -44,6 +41,7 @@ public class HibernateUtil {
 				configuration.addAnnotatedClass(Bed.class);
 				configuration.addAnnotatedClass(Course.class);
 				configuration.addAnnotatedClass(CourseAssignment.class);
+				configuration.addAnnotatedClass(BedAssignment.class);
 
 				ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 						.applySettings(configuration.getProperties()).build();

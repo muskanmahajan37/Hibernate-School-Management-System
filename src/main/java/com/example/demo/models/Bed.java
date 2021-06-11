@@ -22,7 +22,7 @@ public class Bed{
 //    public Bed() {
 //    }
     @OneToMany(mappedBy = "bed", fetch = FetchType.LAZY)
-    private Set<Student> students= new HashSet<>();
+    private Set<BedAssignment> students= new HashSet<>();
 
     public Bed(String bedNumber, BedType type) {
         this.bedNumber = bedNumber;
@@ -36,6 +36,14 @@ public class Bed{
         this.id = id;
         this.bedNumber = bedNumber;
         this.type = type;
+    }
+
+    public Set<BedAssignment> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<BedAssignment> students) {
+        this.students = students;
     }
 
     public Bed() {
@@ -60,10 +68,10 @@ public class Bed{
     public void setType(BedType type) {
         this.type = type;
     }
-    public Set<Student> getStudents() {
-        return students;
-    }
-    public void setStudents(Set<Student> students) {
-        this.students = students;
-    }
+//    public Set<Student> getStudents() {
+//        return students;
+//    }
+//    public void setStudents(Set<Student> students) {
+//        this.students = students;
+//    }
 }

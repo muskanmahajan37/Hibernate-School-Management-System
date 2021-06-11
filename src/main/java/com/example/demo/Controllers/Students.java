@@ -97,7 +97,7 @@ public class Students extends HttpServlet {
         BedDao.saveBed(newBed);
 //        newBed.setId(bedId);
         beds.add(newBed);
-        newStudent.setBeds(beds);
+//        newStudent.setBeds(beds);
 //        studentDao.insertStudent(newStudent);
         studentDaoHbnt.saveStudent(newStudent);
         response.sendRedirect("list");

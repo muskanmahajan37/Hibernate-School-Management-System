@@ -19,15 +19,15 @@ public class Student {
         private String gender;
 
 //        @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-        @JoinTable(
-                name = "student_beds_tbl",
-                joinColumns = {@JoinColumn(name = "student_id")},
-                inverseJoinColumns = {@JoinColumn(name = "bed_id")}
-        )
+//        @JoinTable(
+//                name = "student_beds_tbl",
+//                joinColumns = {@JoinColumn(name = "student_id")},
+//                inverseJoinColumns = {@JoinColumn(name = "bed_id")}
+//        )
 //        private Set<Bed> beds = new HashSet<Bed>();
 
         @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
-        private Set<Bed> beds= new HashSet<>();
+        private Set<BedAssignment> beds= new HashSet<>();
 
     @OneToMany(mappedBy = "student", fetch =FetchType.LAZY )
         private Set<CourseAssignment> courses = new HashSet<>();
@@ -38,13 +38,20 @@ public class Student {
             return id;
         }
 
-    public Set<Bed> getBeds() {
+    public Set<BedAssignment> getBeds() {
         return beds;
     }
 
-    public void setBeds(Set<Bed> beds) {
+    public void setBeds(Set<BedAssignment> beds) {
         this.beds = beds;
     }
+//    public Set<Bed> getBeds() {
+//        return beds;
+//    }
+
+//    public void setBeds(Set<Bed> beds) {
+//        this.beds = beds;
+//    }
 
     public void setId(Long id) {
             this.id = id;
@@ -97,4 +104,5 @@ public class Student {
             this.gender = gender;
             this.lastName = lastName;
         }
+
 }
