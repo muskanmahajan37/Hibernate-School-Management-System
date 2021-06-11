@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "course_assignment")
+@Table(name = "bed_assignment")
 public class BedAssignment implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -16,7 +16,7 @@ public class BedAssignment implements Serializable {
     private Long id;
     private String assignedOn;
     private String assignedBy;
-    
+
     @Enumerated(EnumType.STRING)
     private AssignmentStatus status;
     private String lastStatusChangedOn;
@@ -24,7 +24,7 @@ public class BedAssignment implements Serializable {
     @ManyToOne
     private Student student;
     @ManyToOne
-    private Course course;
+    private Bed bed;
 
     public BedAssignment(){}
 
@@ -81,11 +81,11 @@ public class BedAssignment implements Serializable {
         this.student = student;
     }
 
-    public Course getCourse() {
-        return course;
+    public Bed getBed() {
+        return bed;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setBed(Bed bed) {
+        this.bed = bed;
     }
 }

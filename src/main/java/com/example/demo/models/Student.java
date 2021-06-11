@@ -18,13 +18,15 @@ public class Student {
         @Column(name="gender")
         private String gender;
 
-        @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
         @JoinTable(
                 name = "student_beds_tbl",
                 joinColumns = {@JoinColumn(name = "student_id")},
                 inverseJoinColumns = {@JoinColumn(name = "bed_id")}
         )
-        private Set<Bed> beds = new HashSet<Bed>();
+//        private Set<Bed> beds = new HashSet<Bed>();
+
+        @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
+        private Set<BedAssignment> beds=new HashSet<BedAssignment>();
 
     @OneToMany(mappedBy = "student", fetch =FetchType.LAZY )
         private Set<CourseAssignment> courses = new HashSet<>();
