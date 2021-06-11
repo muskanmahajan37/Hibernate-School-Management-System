@@ -18,18 +18,40 @@ public class BedAssignment implements Serializable {
     private String realesedOn;
     @Enumerated(EnumType.STRING)
     private AssignmentStatus status;
+
     @ManyToOne
     private Student student;
+
     @ManyToOne
     private Bed bed;
+
     public BedAssignment() {
     }
-    public BedAssignment(String assignedBy, AssignmentStatus status) {
+    public BedAssignment(Student student, Bed bed, String assignedBy, AssignmentStatus status) {
         this.assignedOn = LocalDateTime.now().toString();
         this.realesedOn = null;
         this.assignedBy = assignedBy;
         this.status = status;
+        this.bed = bed;
+        this.student = student;
     }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public Bed getBed() {
+        return bed;
+    }
+
+    public void setBed(Bed bed) {
+        this.bed = bed;
+    }
+
     public Long getId() {
         return id;
     }
